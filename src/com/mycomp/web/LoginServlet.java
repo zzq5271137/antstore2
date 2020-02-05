@@ -1,4 +1,4 @@
-package com.mycomp.servlet;
+package com.mycomp.web;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -8,6 +8,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.handlers.BeanHandler;
@@ -40,11 +41,16 @@ public class LoginServlet extends HttpServlet {
         }
 
         if (user == null) {
-            response.setHeader("refresh", "3;/AntStore2/login.jsp");
             response.getWriter().write("<h1>用户名或密码错误</h1>");
+            response.setHeader("refresh", "3;/AntStore2/login.jsp");
         } else {
-            response.setHeader("refresh", "3;/AntStore2/index.jsp");
             response.getWriter().write("<h1>登录成功！</h1>");
+            
+            // 把用户保存起来
+            HttpSession session = request.getSession();
+            session.setAttribute("user", user);
+            
+            response.setHeader("refresh", "3;/AntStore2/index.jsp");
         }
     }
 

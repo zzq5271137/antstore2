@@ -2,6 +2,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,7 +20,7 @@
     <h3 class="hot_goods_title">热卖商品</h3>
     <div class="hot_goods_body">
         <ul>
-	        <%
+	        <%-- <%
 	            // 从request域中取数据
 	            List<Goods> allGoods = (List<Goods>) request.getAttribute("allGoods");
 	            if (allGoods != null) {
@@ -35,7 +36,21 @@
 	            } else {
 	                out.write("<h1>没有商品</h1>");
 	            }
-	        %>
+	        %> --%>
+	        <c:if test="${empty allGoods }">
+	            <h1>没有商品</h1>
+	        </c:if>
+	        <c:if test="${!empty allGoods }">
+	            <c:forEach items="${allGoods }" var="goods">
+                    <li>
+                        <a href="">
+                            <img src="images/goods/goods6.png" alt="">
+                            <p>${goods.name }</p>
+                            <i class="yuan">￥</i><span class="price">${goods.price }</span>
+                        </a>
+                    </li>	                
+	            </c:forEach>
+            </c:if>
         </ul>
     </div>
     <!--分页-->

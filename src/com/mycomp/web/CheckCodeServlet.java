@@ -1,4 +1,4 @@
-package com.mycomp.servlet;
+package com.mycomp.web;
 
 import java.awt.Color;
 import java.awt.Font;
