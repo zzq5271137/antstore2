@@ -21,6 +21,7 @@ public class GoodsDao {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        
         return allGoods;
     }
 
